@@ -5,7 +5,7 @@ LIB = -lncursesw
 EXE1 = bin/test
 HEADER = includes
 EXT = *.o
-
+ 
 $(EXE1): $(SRCS1)
 	clear
 	$(CC) $(CFLAGS) $(SRCS1) -o $(EXE1) $(LIB)

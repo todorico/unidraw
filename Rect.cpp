@@ -1,6 +1,6 @@
 //#DEFINITION
 ////////////////////////////////////////////////// CONSTRUCTEURS
-
+ 
 template <typename T>
 Rect<T>::Rect() : x(), y(), width(), height() {}
 

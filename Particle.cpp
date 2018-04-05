@@ -2,7 +2,7 @@
 
 //#DEFINITION
 ////////////////////////////////////////////////// CONSTRUCTEURS
-
+ 
 Particle::Particle() : position(), velocity(random(-1, 1), random(-1, -1)), acceleration(), lifetime(), mass(1) {}
 
 Particle::Particle(const Vector2f& position, float lifetime) : position(position), velocity(random(-1, 1), random(-1, -1)), acceleration(), lifetime(lifetime), mass(1){}

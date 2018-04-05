@@ -2,7 +2,7 @@
 
 //#DEFINITION
 ///////////////////////////////////////////////// CONSTRUCTEURS
-
+ 
 Window::Window() : m_win() {}
 
 Window::Window(WINDOW* win) : m_win(win) {}

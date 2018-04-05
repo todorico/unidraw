@@ -1,6 +1,6 @@
 #ifndef _TERM_H_
 #define _TERM_H_
-
+ 
 #include "Window.h"
 #include "Mouse.h"
 #include "Keyboard.h"

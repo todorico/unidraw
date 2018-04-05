@@ -18,7 +18,7 @@ void draw_von_koch_rec(Turtle& T, float length, int prof){
 	    draw_von_koch_rec(T, length/3, prof-1); 
 	}
 }
-
+ 
 void draw_von_koch(Canvas& c, const Vector2i& pos, float length, int prof){
 	Turtle T(&c);
 

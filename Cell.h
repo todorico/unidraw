@@ -9,7 +9,6 @@
 #include <cstring>
 //#PREPROCESSING_END
 
-
 //#DECLARATION
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CLASS CELL
 

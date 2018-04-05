@@ -2,7 +2,7 @@
 
 //#DEFINITION
 ////////////////////////////////////////////////// CONSTRUCTEURS
-
+ 
 ColorPair::ColorPair() : front(DEFAULT), back(DEFAULT) {}
 
 ColorPair::ColorPair(chtype c){

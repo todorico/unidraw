@@ -5,7 +5,7 @@
 
 //#DECLARATION
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CLASS CANVAS
-
+ 
 class Canvas : public Window {
 
 protected:

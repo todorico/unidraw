@@ -8,7 +8,7 @@
 extern "C"{
 #include <ncursesw/curses.h>
 }
-
+ 
 //#DECLARATION
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CLASS COLORPAIR
 

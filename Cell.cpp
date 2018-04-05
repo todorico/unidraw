@@ -2,7 +2,7 @@
 
 //#DEFINITION
 ///////////////////////////////////////////////// CONSTRUCTEURS
-
+ 
 Cell::Cell() : character(L' '), color(), attr() {}
 
 Cell::Cell(cchar_t c) : character(c.chars[0]), color(c.attr), attr(c.attr) {}

@@ -1,6 +1,6 @@
 //#DEFINITION
 ////////////////////////////////////////////////// CONSTRUCTEURS
-
+ 
 template <typename T>
 Vector2<T>::Vector2() : x(), y() {}
 

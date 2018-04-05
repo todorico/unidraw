@@ -39,7 +39,7 @@ public:
 	static const Attr AltCharset;
 	static const Attr Italic;
 };
-
+ 
 //#DECLARATION_END
 
 #endif

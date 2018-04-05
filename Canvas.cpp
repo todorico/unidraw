@@ -2,7 +2,7 @@
 
 //#DEFINITION
 ////////////////////////////////////////////////// VARIABLES STATIQUES
-
+ 
 const wint_t braille_char_offset = 0x2800;
 
 const int pixel_map[4][2] = { 	{0x01, 0x08}, 

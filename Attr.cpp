@@ -26,5 +26,5 @@ const Attr Attr::Protected(A_PROTECT);
 const Attr Attr::Invisible(A_INVIS);
 const Attr Attr::AltCharset(A_ALTCHARSET);
 const Attr Attr::Italic(A_ITALIC);
-
+  
 //#DEFINITION_END

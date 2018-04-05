@@ -2,7 +2,7 @@
 
 //#DEFINITION
 ////////////////////////////////////////////////// CONSTRUCTEURS
-
+ 
 Turtle::Turtle() : m_canvas(new Canvas()), rotation(), allocated(true), position() {}
 
 Turtle::Turtle(Canvas* canvas) : m_canvas(canvas), rotation(), allocated(false), position() {}

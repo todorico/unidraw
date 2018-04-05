@@ -2,7 +2,7 @@
 #define _MOUSE_H_
 
 #include "Vector2.h"
-
+ 
 extern "C"{
 #include <ncursesw/curses.h>
 }
