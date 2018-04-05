@@ -1,0 +1,30 @@
+#!/bin/bash
+
+FILES=(Vector2 Rect Attr Color Cell Window Keyboard Mouse Term Canvas Turtle Particle)
+OUTPUT=unidraw.h
+
+# algo : 
+# On parcours tous les .h et on ecrit les //#PREPROCESSING DANS LE FICHIER unidraw.h
+# On parcours un .h  et un .cpp correspondant et on ecrit les //#DECLARATION et //#DEFINITION DANS LE FICHIER unidraw.h
+# 
+# problem with unicode : iconv -f latin1 -t utf-8 sourcefile | sed 's/.*/x/' | iconv -f utf-8 -t latin1
+
+rm "$OUTPUT"
+
+BEGINING="\/\/#PREPROCESSING"
+ENDING="\/\/#PREPROCESSING_END"
+
+for file in "${FILES[@]}"; do
+	sed -n "/$BEGINING/, /$ENDING/{/$BEGINING\|$ENDING/!p}" "$file.h" >> "$OUTPUT"
+done
+
+BEGINING_DEC="\/\/#DECLARATION"
+ENDING_DEC="\/\/#DECLARATION_END"
+
+BEGINING_DEF="\/\/#DEFINITION"
+ENDING_DEF="\/\/#DEFINITION_END"
+
+for file in "${FILES[@]}"; do
+	sed -n "/$BEGINING_DEC/, /$ENDING_DEC/{/$BEGINING_DEC\|$ENDING_DEC/!p}" "$file.h" >> "$OUTPUT"
+	sed -n "/$BEGINING_DEF/, /$ENDING/{/$BEGINING_DEF\|$ENDING_DEF/!p}" "$file.cpp" >> "$OUTPUT"
+done

@@ -1,0 +1,14 @@
+CC = g++
+CFLAGS = -W -Wall -g
+SRCS1 = test_vois.cpp Canvas.cpp Turtle.cpp Color.cpp Attr.cpp Cell.cpp Window.cpp Term.cpp Mouse.cpp Keyboard.cpp Particle.cpp
+LIB = -lncursesw
+EXE1 = bin/test_vois
+HEADER = includes
+EXT = *.o
+
+$(EXE1): $(SRCS1)
+	clear
+	$(CC) $(CFLAGS) $(SRCS1) -o $(EXE1) $(LIB)
+
+clean:
+	rm -f $(EXT)
