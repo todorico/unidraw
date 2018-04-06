@@ -2,7 +2,7 @@
 
 //#DEFINITION
 ////////////////////////////////////////////////// CONSTRUCTEURS
- 
+
 ColorPair::ColorPair() : front(DEFAULT), back(DEFAULT) {}
 
 ColorPair::ColorPair(chtype c){
@@ -73,6 +73,7 @@ void init_color_pairs(){
 			{
 				//init_pair(numero, front, back) (-1 correspond à la couleur par default du terminal)
 				init_pair(j * COLORS + i + 1, j - 1, i - 1);
+				//init_pair(i, i, -1);
 			}
 		}
 	}

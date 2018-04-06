@@ -35,7 +35,13 @@ void Term::init_curs() {
 	setlocale(LC_ALL, "");
 
 	//active les deplacements de la souris si un touche est pressé (-1003 tout le temps)
-	setenv("TERM", "xterm-1002", 1); 	
+	
+	std::string term(getenv("TERM"));
+
+	std::size_t found = term.find("xterm");
+
+	if(found != std::string::npos)
+		setenv("TERM", "xterm-256color", 1); 	
 
 	initscr();    // initialize curses
 

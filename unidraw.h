@@ -4,7 +4,7 @@
 #ifndef _XOPEN_SOURCE_EXTENDED
 #define _XOPEN_SOURCE_EXTENDED // pour utilisé les fonction wide character et cchar_t
 #endif
- 
+
 extern "C"{
 #include <ncursesw/curses.h>
 }
@@ -114,7 +114,7 @@ template <typename T>
 std::istream& operator>>(std::istream& is, Vector2<T>& vector);
 
 ////////////////////////////////////////////////// CONSTRUCTEURS
-
+ 
 template <typename T>
 Vector2<T>::Vector2() : x(), y() {}
 
@@ -354,7 +354,7 @@ template <typename T>
 std::istream& operator>>(std::istream& is, Rect<T>& rect);
 
 ////////////////////////////////////////////////// CONSTRUCTEURS
-
+ 
 template <typename T>
 Rect<T>::Rect() : x(), y(), width(), height() {}
 
@@ -477,7 +477,7 @@ public:
 	static const Attr AltCharset;
 	static const Attr Italic;
 };
-
+ 
 ////////////////////////////////////////////////// CONSTRUCTEURS
 
 Attr::Attr() : m_attribute(A_NORMAL) {}
@@ -503,7 +503,7 @@ const Attr Attr::Protected(A_PROTECT);
 const Attr Attr::Invisible(A_INVIS);
 const Attr Attr::AltCharset(A_ALTCHARSET);
 const Attr Attr::Italic(A_ITALIC);
-
+  
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CLASS COLORPAIR
 
 enum ColorUnit{
@@ -566,7 +566,7 @@ void init_color_pairs();
 void color_rgb(ColorUnit color, short r, short g, short b);
 
 ////////////////////////////////////////////////// CONSTRUCTEURS
-
+ 
 ColorPair::ColorPair() : front(DEFAULT), back(DEFAULT) {}
 
 ColorPair::ColorPair(chtype c){
@@ -658,7 +658,7 @@ public:
 };
 
 ///////////////////////////////////////////////// CONSTRUCTEURS
-
+ 
 Cell::Cell() : character(L' '), color(), attr() {}
 
 Cell::Cell(cchar_t c) : character(c.chars[0]), color(c.attr), attr(c.attr) {}
@@ -811,7 +811,7 @@ public:
 };
 
 ///////////////////////////////////////////////// CONSTRUCTEURS
-
+ 
 Window::Window() : m_win() {}
 
 Window::Window(WINDOW* win) : m_win(win) {}
@@ -1050,7 +1050,7 @@ void Window::refresh(){
 }
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CLASS KEYBOARD
-
+ 
 class Keyboard {
 
 public:
@@ -1081,7 +1081,7 @@ public:
 };
 
 ///////////////////////////////////////////////// VARIABLES STATIQUES
-
+ 
 int Keyboard::input = -1;
 
 ///////////////////////////////////////////////// METHODES
@@ -1328,7 +1328,7 @@ public:
 };
 
 ///////////////////////////////////////////////// VARIABLES STATIQUES
-
+ 
 MEVENT Mouse::event;
 
 ///////////////////////////////////////////////// METHODES
@@ -1600,7 +1600,7 @@ void Term::update(){
 
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CLASS CANVAS
-
+ 
 class Canvas : public Window {
 
 protected:
@@ -1664,7 +1664,7 @@ void draw_line(Canvas& canvas, int x1, int y1, int x2, int y2);
 void draw_line(Canvas& canvas, const Vector2i& p1, const Vector2i p2);
 
 ////////////////////////////////////////////////// VARIABLES STATIQUES
-
+ 
 const wint_t braille_char_offset = 0x2800;
 
 const int pixel_map[4][2] = { 	{0x01, 0x08}, 
@@ -2066,7 +2066,7 @@ void draw_line(Canvas& canvas, int x1, int y1, int x2, int y2){
 }
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CLASS TURTLE
-
+ 
 class Turtle
 {
 private:
@@ -2100,7 +2100,7 @@ float to_radians(float degree);
 void draw_polygon(Canvas& canvas, Vector2f center, int sides, float radius, float rotation);
 
 ////////////////////////////////////////////////// CONSTRUCTEURS
-
+ 
 Turtle::Turtle() : m_canvas(new Canvas()), rotation(), allocated(true), position() {}
 
 Turtle::Turtle(Canvas* canvas) : m_canvas(canvas), rotation(), allocated(false), position() {}
@@ -2257,7 +2257,7 @@ float random(int start, int end, int precision = 100000);
 float constrain(float f, float start, float end);
 
 ////////////////////////////////////////////////// CONSTRUCTEURS
-
+ 
 Particle::Particle() : position(), velocity(random(-1, 1), random(-1, -1)), acceleration(), lifetime(), mass(1) {}
 
 Particle::Particle(const Vector2f& position, float lifetime) : position(position), velocity(random(-1, 1), random(-1, -1)), acceleration(), lifetime(lifetime), mass(1){}

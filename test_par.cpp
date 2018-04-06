@@ -51,7 +51,7 @@ int main(int argc, char const *argv[])
 
 	IntRect zone(Vector2i::zero, Vector2i(50, 50));
 
-	ParticleSystem PS(lifetime, IntRect(0, 0, 0, 0), 0.95);
+	ParticleSystem PS(lifetime, IntRect(-1, 1, -1, 1), 0.99);//0.95);
 	//PS.add_particles(n, Vector2f(canvas.get_size()) / float(2.0));
 	PS.add_particles(n, zone);
 
