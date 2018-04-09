@@ -8,35 +8,71 @@
 extern "C"{
 #include <ncursesw/curses.h>
 }
+#include <algorithm>
+#include <cmath>
+
  
 //#DECLARATION
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CLASS COLORPAIR
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ENUMERATION COLORUNIT
 
 enum ColorUnit{
 	DEFAULT = -1, //La couleur par default du terminal a l'initialisation de ncurses
-	
 	BLACK = COLOR_BLACK,
-	WHITE = COLOR_WHITE,
-
 	RED = COLOR_RED,
 	GREEN = COLOR_GREEN,
+	YELLOW = COLOR_YELLOW,
 	BLUE = COLOR_BLUE,
-		
-	CYAN = COLOR_CYAN,
 	MAGENTA = COLOR_MAGENTA,
-	YELLOW = COLOR_YELLOW
+	CYAN = COLOR_CYAN,
+	WHITE = COLOR_WHITE
 };
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CLASS COLOR
+
+class Color {
+
+public:
+	
+	uint8_t r;
+	uint8_t g;
+	uint8_t b;
+
+	Color();
+	Color(uint8_t red, uint8_t green, uint8_t blue);
+
+	static const Color Black;
+	static const Color Red;
+	static const Color Green;
+	static const Color Yellow;
+	static const Color Blue;
+	static const Color Magenta;
+	static const Color Cyan;
+	static const Color White;
+};
+
+bool operator==(const Color& left, const Color& right);
+bool operator!=(const Color& left, const Color& right);
+
+Color operator+(const Color& left, const Color& right); 
+Color operator-(const Color& left, const Color& right); 
+Color operator*(const Color& left, const Color& right);
+
+Color& operator+=(Color& left, const Color& right);
+Color& operator-=(Color& left, const Color& right);
+Color& operator*=(Color& left, const Color& right);
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CLASS COLORPAIR
 
 class ColorPair
 {
 public:
-	ColorUnit front;
-	ColorUnit back;
+	Color front;
+	Color back;
 
 	ColorPair();
 	ColorPair(chtype);
-	ColorPair(ColorUnit front_back);
 	ColorPair(ColorUnit front, ColorUnit back);
+	ColorPair(Color front, Color back);
 
 /* Renvoie le numéro correspondant à la paire de couleur composée de front et back */
 	int pair_num() const;
@@ -45,22 +81,14 @@ public:
 	operator chtype() const;
 
 	static const ColorPair Default;
-	static const ColorPair WhiteBlack;
-	static const ColorPair WhiteRed;
-	static const ColorPair WhiteGreen;
-	static const ColorPair WhiteBlue;
-	static const ColorPair WhiteMagenta;
-	static const ColorPair WhiteYellow;
-	static const ColorPair WhiteCyan;
-
-	static const ColorPair White;
 	static const ColorPair Black;
 	static const ColorPair Red;
 	static const ColorPair Green;
+	static const ColorPair Yellow;
 	static const ColorPair Blue;
 	static const ColorPair Magenta;
-	static const ColorPair Yellow;
 	static const ColorPair Cyan;
+	static const ColorPair White;
 };
 
 ////////////////////////////////////////////////// FONCTIONS DECLARATION
@@ -70,6 +98,30 @@ void init_color_pairs();
 
 /* Change les valeurs de rouge vert et bleu associée à une couleur */
 void color_rgb(ColorUnit color, short r, short g, short b);
+
+/* Verifie si le numero de couleur correspond a une couleur grise */
+bool is_number_grey_color(int color_num);
+
+/* Verifie si le numero de couleur correspond a une couleur systeme */
+bool is_number_system_color(int color_num);
+
+/* Verifie si la couleur est grise */
+bool is_color_grey(uint8_t r, uint8_t g, uint8_t b);
+
+/* Verifie si la couleur est une couleur systeme */
+bool is_color_system_color(uint8_t r, uint8_t g, uint8_t b);
+
+/* Convertie un valeur rgb de gris [0 255] en index de couleur pour le terminal */
+int to_grey_index(uint8_t rgb);
+
+/* Convertie un valeur rgb de couleur [0 255] en index de couleur pour le terminal */
+int to_color_index(uint8_t rgb);
+
+/* Convertie un numero de couleur en couleur */
+Color to_color(int color_num);
+
+/* Convertie une couleur en son numero associé */
+int to_number(const Color& c);
 
 //#DECLARATION_END
 

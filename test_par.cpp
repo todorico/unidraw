@@ -46,8 +46,8 @@ int main(int argc, char const *argv[])
 	
 	Canvas canvas;
 
-	canvas.set_attr(Attr::Bright);
-	canvas.set_color(ColorPair::Default);
+	//canvas.set_attr(Attr::Bright);
+	canvas.set_color(ColorPair::White);
 
 	IntRect zone(Vector2i::zero, Vector2i(50, 50));
 
