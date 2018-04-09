@@ -57,13 +57,7 @@ void print_colors(int mod){
 		}
 	}
 */
-	COLOR[16] = (0, 0, 0)
-//COLOR[128] = (175, 0, 215)
-//COLOR[255] = (238, 238, 238)
-
-	16 <= 0
-	17...21 <= 95 + 40 * b (in 0...5) ;
-
+/*
 	for(int b = -1 ; b < 5 ; b++){
 		for(int g = -1 ; g < 5 ; g++){
 			for(int r = -1 ; r < 5 ; r++){
@@ -73,6 +67,7 @@ void print_colors(int mod){
 			}
 		}
 	}
+*/
 }
 
 int map_to_table(int rgb){
@@ -88,6 +83,9 @@ int map_to_pair(int rgb){
 }
 
 int pair(int red, int green, int blue){
+	if(red == green && red == blue){
+		8 + 10;
+	}
 	map_to_table(red);
 	map_to_table(green);
 	map_to_table(blue);
@@ -109,7 +107,8 @@ class Color{
 /* Convertie en chtype la paire de couleur composée de front et back */
 	operator chtype() const;
 
-	static chtype pair(Color front, Color back);
+/* Numero de pair associés a la couleur */
+	static chtype pair(Color front, Color back = Color::Default);
 
 	static const Color Default;
 	static const Color White;
@@ -125,20 +124,17 @@ class Color{
 bool operator==(const Color& left, const Color& right);
 bool operator!=(const Color& left, const Color& right);
 
-Color operator*(const Color& left, const Color& right); //restraindre a 255
-Color& operator*=(Color& left, const Color& right);
-
 Color operator+(const Color& left, const Color& right);//min(c + c /2, 255)
-Color& operator+=(Color& left, const Color& right);
-
 Color operator-(const Color& left, const Color& right); 
-Color& operator-=(Color& left, const Color& right); //restraindre a 255
+Color operator*(const Color& left, const Color& right); //restraindre a 255
 
-static chtype Pair(Color front, Color back);
+Color& operator+=(Color& left, const Color& right);
+Color& operator-=(Color& left, const Color& right); //restraindre a 255
+Color& operator*=(Color& left, const Color& right);
 
 int main(int argc, char** argv)
 {
-	int mod = 8;
+	int mod = 6;
 
 	if(argc > 1)
 		mod = atoi(argv[1]);

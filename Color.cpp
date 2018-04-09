@@ -67,15 +67,15 @@ void init_color_pairs(){
 
 		use_default_colors(); // -> COLOR_PAIR(0) = DefaultColor (est un extensino de ncurses)
 
-		for (int j = 0; j < COLORS; ++j)
-		{
+		//for (int j = 0; j < COLORS; ++j)
+		//{
 			for (int i = 0; i < COLORS; ++i)
 			{
 				//init_pair(numero, front, back) (-1 correspond à la couleur par default du terminal)
-				init_pair(j * COLORS + i + 1, j - 1, i - 1);
-				//init_pair(i, i, -1);
+				//init_pair(j * COLORS + i + 1, j - 1, i - 1);
+				init_pair(i, i, -1);
 			}
-		}
+		//}
 	}
 }
 
