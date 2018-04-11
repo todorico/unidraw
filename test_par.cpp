@@ -43,11 +43,16 @@ int main(int argc, char const *argv[])
 
 	Term::init_curs();
 	Term::set_timeout(0);
-	
-	Canvas canvas;
+	//Term::scr.set_background_color(Color::Green);
+	//refresh();
 
-	canvas.set_attr(Attr::Underline);
-	canvas.set_color(ColorPair::Red);
+	Canvas canvas;
+	//canvas.set_background_color(Color::Green);
+	//wclear(canvas);
+	canvas.set_attr(Attr::Bright);
+	canvas.set_color(Color::Red);
+
+	//canvas.set_background_color(Color::Yellow);
 
 	IntRect zone(Vector2i::zero, Vector2i(50, 50));
 
@@ -56,6 +61,8 @@ int main(int argc, char const *argv[])
 	PS.add_particles(n, zone);
 
 	while(!Keyboard::is_pressed(Keyboard::Escape)){
+
+		canvas.set_color(Color(rand() % 256, rand() % 256, rand() % 256));
 
 		nbframe++;
 
@@ -89,6 +96,7 @@ int main(int argc, char const *argv[])
 		float clear_time = clock();
 
 		canvas.clear();
+		//wclear(canvas);
 
 		clear_time = (clock() - clear_time) / (float)CLOCKS_PER_SEC;
 

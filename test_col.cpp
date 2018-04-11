@@ -1,4 +1,4 @@
-#include "Term.h"
+#include "Canvas.h"
 
 /* Affiche toutes les Pairs de couleurs disponibles dans le terminal */
 void print_colors(int mod){
@@ -14,28 +14,34 @@ void print_colors(int mod){
 	}
 
 /*
+	8 premier si (r == 0 || r == 128) && (b == 0 || b == 128) && (b == 0 || b == 128)
+	&& (r == b == g == 192)
+
+	16 premier si (r == b == g == 128) && (r == 0 || r == 255) && (b == 0 || b == 255) && (b == 0 || b == 255)
+
+	r % 128 + 2 * (g % 128) + 4 * (b % 128) 
 	0 --> 15 classic color 		
 	16 --> 231 rgb color
 	232 --> 255 grey color
 	
-	int COLORS_VARIATION = 0;
-	int GREYS_VARIATION = 0;
+	int RGB_MAX_INTENSITY = 0;
+	int GREY_MAX_INTENSITY = 0;
 
 	if(COLORS == 88){
-		COLORS_VARIATION = 4;
-		GREYS_VARIATION = 8;
+		RGB_MAX_INTENSITY = 4;
+		GREY_MAX_INTENSITY = 8;
 	}
 	else if(COLORS == 256){
-		COLORS_VARIATION = 6;
-		GREYS_VARIATION = 24;
+		RGB_MAX_INTENSITY = 6;
+		GREY_MAX_INTENSITY = 24;
 	}
 
 	grey = 8 + 10 * i
 	
 	(grey - 8) / 10 = i
-
  */
 }
+
 /*
 bool is_number_grey_color(int color_num){
 	return color_num >= 232;
@@ -69,6 +75,7 @@ class Color {
 
 public:
 	
+	int color_num;
 	uint8_t r;
 	uint8_t g;
 	uint8_t b;
@@ -180,9 +187,9 @@ int main(int argc, char** argv)
 {
 	int mod = 6;
 
-	int n = 20;
-	int min = 50;
-	int max = 1000;
+	int n = 10;
+	int min = 0;
+	int max = 0;
 
 	srand(time(NULL));
 
@@ -195,87 +202,15 @@ int main(int argc, char** argv)
 
 	Term::init_curs();
 
-	
-	//printw("coucou");
-
-	//assume_default_colors(0, 1); 
-	//Term::scr.set_background_color(Color::Green);
-	
-	//printw("coucou");
-
-	//refresh();
-
-	//assume_default_colors(0, 2);
-	Term::scr.set_background_color(Color::Green);
-
-	//Term::scr.fill(Cell('@', Color::Red, Attr::Blink))
-
-	attron(COLOR_PAIR(10) | Attr::Underline);// | Attr::Reverse | Attr::Italic);
-	printw("%lc", U_CIRCLE);
-	attroff(COLOR_PAIR(10) | Attr::Underline);// | Attr::Reverse | Attr::Italic);
-
-	//erase();
-	/*
-	Term::scr.set_background_color(Color::Red);
-
-	attron(COLOR_PAIR(5));
-	printw("COUCOU");
-	attroff(COLOR_PAIR(5));
-	*/
-	refresh();
-
-	//assume_default_colors(0, 0);
-/*
-	for(int j = n ; j < min ; j++){
-		
-		assume_default_colors(-1, j);
-		
-		//bkgdset()
-
-		//clear();
-
-		for(int i = 0 ; i < 256 ; i++){
-			attron(COLOR_PAIR(i));
-			printw("*");
-			attroff(COLOR_PAIR(i));	
+	for(int r = 1 ; r < 7 ; r++){
+		for(int g = 1 ; g < 7 ; g++){
+			for(int b = 1 ; b < 7 ; b++){
+				Term::scr.set_color(Color((r * 255) / 6, (g * 255) / 6, (b * 255) / 6));
+				printw("%c", '@');
+			}
 		}
-
-		wnoutrefresh(stdscr);
-		doupdate();
-
-		//Term::wait(max);
 	}
 
-	chtype ch = mvinch(0, max);
-
-	erase();
-
-	bkgd(ch);
-
-	attron(COLOR_PAIR(2));
-	printw("coucou");
-	attroff(COLOR_PAIR(2));
-
-	refresh();
-
-	assume_default_colors(-1, 18);
-
-	//bkgd(' ');
-	//clear();
-
-	attron(COLOR_PAIR(3));
-	printw("coucou");
-	attroff(COLOR_PAIR(3));
-
-	refresh();
-
-	//attron(ch & A_COLOR);
-	//mvprintw(10, 10, "color (0, %d)", max);
-	//attroff(ch & A_COLOR);
-
-	
-	//refresh();
-*/
 	getch();
 
 	Term::end_curs();

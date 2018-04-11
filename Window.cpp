@@ -42,13 +42,13 @@ Cell Window::get_cell(const Vector2i& coord) const{
 void Window::set_cell(const Vector2i& coord, const Cell& cell){
 	cchar_t c = cell;
 
-	if(cell.color == ColorPair::Default)
+	if(cell.color == ColorPair::White)
 		c.attr |= get_color(); //affiche dans la couleur courante du terminal
 
 	mvwadd_wchnstr(m_win, coord.y, coord.x, &c, 1);
-}
+} 
 
-void Window::set_cell(const Vector2i& coord, wint_t wchar, ColorPair color, Attr attr){
+void Window::set_cell(const Vector2i& coord, wint_t wchar, Color color, Attr attr){
 	set_cell(coord, Cell(wchar, color, attr));
 }
 
@@ -63,22 +63,23 @@ Attr Window::get_attr() const{
 
 void Window::set_attr(Attr attr){ 
 	attr_t at = attr;
-	short pair = get_color().pair_num();
+	short pair = get_color().to_pair();
 	
 	wattr_set(m_win, at, pair, NULL);
 }
 
-ColorPair Window::get_color() const{
-	attr_t at;
+Color Window::get_color() const{
+	attr_t at; 
 	short pair; 
-	
+	short front;
+
 	wattr_get(m_win, &at, &pair, NULL);
 
-	return COLOR_PAIR(pair);
+	return Color(COLOR_PAIR(pair));
 }
 
-void Window::set_color(ColorPair color){
-	wcolor_set(m_win, color.pair_num(), NULL);
+void Window::set_color(Color color){
+	wcolor_set(m_win, color.to_pair(), NULL);
 }
 
 void Window::set_on(chtype attr_color){
@@ -114,9 +115,10 @@ void Window::set_border(Cell left, Cell right, Cell up, Cell down, Cell upLeft, 
 	wborder_set(m_win, &l, &r, &u, &d, &ul, &ur, &dl, &dr);
 }
 
-void Window::set_border(BorderType type, ColorPair color, Attr a){
+//check colorpair
+void Window::set_border(BorderType type, Color color, Attr a){
 
-	ColorPair c = color == ColorPair::Default ? get_color() : color;
+	Color c = color == Color::White ? get_color() : color;
  
 	switch (type)
 	{
@@ -161,17 +163,18 @@ void Window::set_border(BorderType type, ColorPair color, Attr a){
 		break;
 	}
 }
-
+//check colorpair
 void Window::fill(const Cell& cell){
 	cchar_t c = cell;
 
-	if(cell.color == ColorPair::Default)
-		c.attr |= get_color(); //affiche dans la couleur courante du terminal
+	//if(cell.color == ColorPair::Default)
+	//	c.attr |= get_color(); //affiche dans la couleur courante du terminal
 
 	wbkgrnd(m_win, &c);
 }
 
-void Window::fill(ColorPair color, Attr attr){
+//check colorpair
+void Window::fill(Color color, Attr attr){
 	Cell cell;
 	cell.color = color;
 	cell.attr = attr;
@@ -193,9 +196,10 @@ void Window::set_background(const Cell& cell){
 	wbkgrndset(m_win, &c);
 }
 
-void Window::set_background(ColorPair color, Attr attr){
+//check colorpair
+void Window::set_background(Color color, Attr attr){
 	Cell cell;
-	cell.color = color == ColorPair::Default ? get_color() : color;
+	cell.color = color == Color::White ? get_color() : color;
 	cell.attr = attr;
 
 	set_background(cell);
@@ -207,7 +211,7 @@ Color Window::get_background_color() const{
 
 void Window::set_background_color(const Color& color){
 	m_background = color;
-	assume_default_colors(0, to_number(color));
+	assume_default_colors(0, color.to_number());
 }
 
 void Window::clear(){

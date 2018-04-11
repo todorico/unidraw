@@ -5,7 +5,68 @@
 
 Color::Color() : r(), g(), b() {}
 
+Color::Color(chtype color) : r(), g(), b() {
+
+	short f = 0;
+	short red = 0, green = 0, blue = 0; 
+
+	/* Get foreground color */
+	pair_content(PAIR_NUMBER(color), &f, NULL);
+
+	/* Get rgb of foreground color */
+	color_content(f, &red, &green, &blue);
+
+	//1000 est l'intensité maximale qui peut etre stocker dans red/green/blue.
+	r = (int)(red * 255) / 1000; 
+	g = (int)(green * 255) / 1000; 
+	b = (int)(blue * 255) / 1000; 
+}
+
 Color::Color(uint8_t red, uint8_t green, uint8_t blue) : r(red), g(green), b(blue) {}
+
+////////////////////////////////////////////////// METHODES
+
+int Color::to_number() const{
+
+	switch(COLORS){
+		case 8:
+		return to_8_color_num(r, g, b);
+		break;
+
+		case 16:
+		return to_16_color_num(r, g, b);
+		break;
+
+		case 88:
+		return to_88_color_num(r, g, b);
+		break;
+
+		case 256:
+		return to_256_color_num(r, g, b);
+		break;
+
+		default:
+		return -1;
+		break;
+	}
+}
+
+short Color::to_pair() const{
+	
+	int color_num = to_number();
+
+	return color_num == -1 ? 0 : color_num + 1;
+}
+
+std::string Color::to_string() const{
+	std::stringstream ss;
+	ss << "(" << r << ", " << g << ", " << b << ")";
+	return ss.str();
+}
+
+Color::operator chtype() const{
+	return COLOR_PAIR(to_pair());
+}
 
 ////////////////////////////////////////////////// VARIABLES STATIQUES
 
@@ -75,13 +136,13 @@ ColorPair::ColorPair(chtype c){
 
 	pair_content(PAIR_NUMBER(c), &f, &b);
 
-	front = to_color(f);
-	back = to_color(b);
+	front = to_color_rgb(f);
+	back = to_color_rgb(b);
 }
 
 ColorPair::ColorPair(ColorUnit front, ColorUnit back) {
-	this->front = to_color(front);
-	this->back = to_color(back);
+	this->front = to_color_rgb(front);
+	this->back = to_color_rgb(back);
 }
 
 ColorPair::ColorPair(Color front, Color back) {
@@ -92,11 +153,11 @@ ColorPair::ColorPair(Color front, Color back) {
 ////////////////////////////////////////////////// METHODES
 
 int ColorPair::pair_num() const{
-	return to_number(front); //* COLORS + (to_number(back));
+	return front.to_pair(); //* COLORS + (to_number(back));
 }
 
 ColorPair::operator chtype() const{
-	return COLOR_PAIR(pair_num()) + 1;
+	return COLOR_PAIR(pair_num());
 }
 
 ////////////////////////////////////////////////// VARIABLE STATIQUES
@@ -119,83 +180,81 @@ void init_color_pairs(){
 
 		start_color();
 
-		use_default_colors(); // -> COLOR_PAIR(0) = DefaultColor (est un extensino de ncurses)
+		use_default_colors(); // -> COLOR_PAIR(0) = Default Color (est un extension de ncurses)
 
-		//int k = 1;
-		/*
-		for (int b = 0; b < 8; ++b){
-
-			for (int f = 0; f < 8; ++f){
-				
-				init_pair(k, f, b);
-				k++;
-			}
-		}
-		*/
 		for (int f = 0; f < COLORS; ++f){
-			//init_pair(numero, front, back) (-1 correspond à la couleur par default du terminal)
-			//init_pair(b * COLORS + f + 1, f, b);
 			init_pair(f + 1, f, -1);
 		}
-
-
 	}
 }
 
-bool is_number_grey_color(int color_num){ 
-	return color_num >= 232;
+bool is_color_0_to_7(uint8_t r, uint8_t g, uint8_t b){
+	return (r == 192 && r == g && r == b) || ((r == 0 || r == 128) && (g == 0 || g == 128) && (b == 0 || b == 128));
 }
 
-bool is_number_system_color(int color_num){
-	return color_num < 16;
+bool is_color_8_to_15(uint8_t r, uint8_t g, uint8_t b){
+	return !(r == 0 && g == 0 && b == 0) && (((r == 128 && r == g && r == b) || ((r == 0 || r == 255) && (g == 0 || g == 255) && (b == 0 || b == 255))));
 }
 
-bool is_color_grey(uint8_t r, uint8_t g, uint8_t b){
-	return r == g && r == b && r && r >= 8 && r <= 238;
-}
-/*
-bool is_system_color(uint8_t r, uint8_t g, uint8_t b){
-	return 0; // a implementer
-}
-*/
-int to_grey_index(uint8_t rgb){
-	return round((rgb - 8) / 10.0f); //parametrer les valeurs selon le nb couleur du terminal
+bool is_color_greyscale(uint8_t r, uint8_t g, uint8_t b){
+	return (r >= 8 && r <= 238) && r == g && r == b;
 }
 
-int to_color_index(uint8_t rgb){
-	return (rgb - 95) < 0 ? round(rgb / 95.0f) : round((rgb - 95) / 40.0f) + 1; //parametrer les valeurs selon le nb couleur du terminal
+int to_8_color_num(uint8_t r, uint8_t g, uint8_t b){
+	uint8_t red = r > 0 ? 1 : 0; 
+	uint8_t green = g > 0 ? 1 : 0; 
+	uint8_t blue = b > 0 ? 1 : 0; 
+
+	return red + 2 * green + 4 * blue;
 }
 
-Color to_color(int color_num) {
+int to_16_color_num(uint8_t r, uint8_t g, uint8_t b){
 
-	Color c;
+	if(is_color_8_to_15(r, g, b)){
+		if(r == 128)
+			return 8;
+		else
+			return 8 + to_8_color_num(r, g, b);
+	}
+	else
+		return to_8_color_num(r, g, b);
+}
 
-	if(is_number_grey_color(color_num)){
+/* verifier les echelles de gris */
+int to_88_color_num(uint8_t r, uint8_t g, uint8_t b){
 
-		int deb = (color_num - 232);
-		int grey = 8 + 10 * (deb / 10); 
-
-		c.b = grey; 
-		c.g = grey; 
-		c.r = grey;
+	if(is_color_greyscale(r, g, b)){
+		return 80 + round((r * 8) / 238.0f); 
 	}
 	else{
+		short red = std::max(((r * 4) / 255) - 1, 0); 
+		short green = std::max(((g * 4) / 255) - 1, 0); 
+		short blue = std::max(((b * 4) / 255) - 1, 0); 
 
-		int deb = (color_num - 16);
-
-		c.b = deb % 6 == 0 ? 0 : 95 + 40 * ((deb % 6) - 1);
-		c.g = deb / 6 == 0 ? 0 : 95 + 40 * ((deb / 6) - 1);
-		c.r = deb / 6 * 6 == 0 ? 0 : 95 + 40 * ((deb / 6 * 6) - 1);
+		return 16 + blue + 4 * green + 16 * red;
 	}
-
-	return c;
 }
 
-int to_number(const Color& c) {
-	if(is_color_grey(c.r, c.g, c.b))
-		return 232 + to_grey_index(c.r);
-	else
-		return 16 + to_color_index(c.b) + (6 * to_color_index(c.g)) + (6 * 6 * to_color_index(c.r)); //parametrer les valeurs selon le nb couleur du terminal
+int to_256_color_num(uint8_t r, uint8_t g, uint8_t b){
+
+	if(is_color_greyscale(r, g, b)){
+		return 232 + ((r * 24) / 238.0f); 
+	}
+	else{
+		short red = std::max(((r * 6) / 255) - 1, 0); 
+		short green = std::max(((g * 6) / 255) - 1, 0); 
+		short blue = std::max(((b * 6) / 255) - 1, 0); 
+
+		return 16 + blue + 6 * green + 36 * red;
+	}
+}
+
+Color to_color_rgb(int color_num){
+	short r = 0, g = 0, b = 0;
+
+	color_content(color_num, &r, &g, &b);
+
+	return Color((int)(r * 255) / 1000, (int)(g * 255) / 1000, (int)(b * 255) / 1000); 
 }
 
 //#DEFINITION_END

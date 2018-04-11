@@ -16,12 +16,12 @@ class Cell
 {
 public:
 	wint_t character;
-	ColorPair color;
+	Color color;
 	Attr attr;
 
 	Cell();
 	Cell(cchar_t);
-	Cell(wint_t, ColorPair color = ColorPair::Default, Attr attr = Attr::Normal);
+	Cell(wint_t, Color color = Color::White, Attr attr = Attr::Normal);
 	operator cchar_t() const; //verifier avec valgrind pas de problème d'initialisation de variable local
 };
 

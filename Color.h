@@ -8,6 +8,7 @@
 extern "C"{
 #include <ncursesw/curses.h>
 }
+#include <sstream>
 #include <algorithm>
 #include <cmath>
 
@@ -33,12 +34,19 @@ class Color {
 
 public:
 	
-	uint8_t r;
-	uint8_t g;
-	uint8_t b;
+	short r;
+	short g;
+	short b;
 
 	Color();
+	Color(chtype color);
 	Color(uint8_t red, uint8_t green, uint8_t blue);
+
+	int to_number() const;
+	short to_pair() const;
+	std::string to_string() const;
+	
+	operator chtype() const;
 
 	static const Color Black;
 	static const Color Red;
@@ -97,31 +105,31 @@ public:
 void init_color_pairs();
 
 /* Change les valeurs de rouge vert et bleu associée à une couleur */
-void color_rgb(ColorUnit color, short r, short g, short b);
+void set_color_rgb(ColorUnit color, short r, short g, short b);
 
-/* Verifie si le numero de couleur correspond a une couleur grise */
-bool is_number_grey_color(int color_num);
+/* Verifie si la couleur rgb correspond a un numero de couleur entre 0 et 7 */
+bool is_color_0_to_7(uint8_t r, uint8_t g, uint8_t b);
 
-/* Verifie si le numero de couleur correspond a une couleur systeme */
-bool is_number_system_color(int color_num);
+/* Verifie si la couleur rgb correspond a un numero de couleur entre 8 et 7 */
+bool is_color_8_to_15(uint8_t r, uint8_t g, uint8_t b);
 
-/* Verifie si la couleur est grise */
-bool is_color_grey(uint8_t r, uint8_t g, uint8_t b);
+/* Verifie si la couleur rgb correspond a un numero de niveaux de gris */
+bool is_color_greyscale(uint8_t r, uint8_t g, uint8_t b);
 
-/* Verifie si la couleur est une couleur systeme */
-bool is_color_system_color(uint8_t r, uint8_t g, uint8_t b);
+/* Convertie la couleur rgb pour un terminal 8 couleurs */
+int to_8_color_num(uint8_t r, uint8_t g, uint8_t b);
 
-/* Convertie un valeur rgb de gris [0 255] en index de couleur pour le terminal */
-int to_grey_index(uint8_t rgb);
+/* Convertie la couleur rgb pour un terminal 16 couleurs */
+int to_16_color_num(uint8_t r, uint8_t g, uint8_t b);
 
-/* Convertie un valeur rgb de couleur [0 255] en index de couleur pour le terminal */
-int to_color_index(uint8_t rgb);
+/* Convertie la couleur rgb pour un terminal 88 couleurs */
+int to_88_color_num(uint8_t r, uint8_t g, uint8_t b);
 
-/* Convertie un numero de couleur en couleur */
-Color to_color(int color_num);
+/* Convertie la couleur rgb pour un terminal 256 couleurs */
+int to_256_color_num(uint8_t r, uint8_t g, uint8_t b);
 
-/* Convertie une couleur en son numero associé */
-int to_number(const Color& c);
+/* Convertie le numero de la couleur en couleur rgb */
+Color to_color_rgb(int color_num);
 
 //#DECLARATION_END
 

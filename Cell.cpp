@@ -7,7 +7,7 @@ Cell::Cell() : character(L' '), color(), attr() {}
 
 Cell::Cell(cchar_t c) : character(c.chars[0]), color(c.attr), attr(c.attr) {}
 
-Cell::Cell(wint_t character, ColorPair color, Attr attr) : character(character), color(color), attr(attr) {} 
+Cell::Cell(wint_t character, Color color, Attr attr) : character(character), color(color), attr(attr) {} 
 
 ///////////////////////////////////////////////// METHODES
 
