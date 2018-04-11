@@ -180,9 +180,9 @@ int main(int argc, char** argv)
 {
 	int mod = 6;
 
-	int n = 20000;
+	int n = 20;
 	int min = 50;
-	int max = 255;
+	int max = 1000;
 
 	srand(time(NULL));
 
@@ -195,20 +195,87 @@ int main(int argc, char** argv)
 
 	Term::init_curs();
 
-	//print_colors(mod);
 	
-	for(int i = n ; i < min ; i++){
+	//printw("coucou");
 
-		if(i % 256 == 0 && i != 0)
-			printw("\n");
-		//for(int j = 0 ; j < num ; j++){
-				//Color color(n, min, max);
-				attron(COLOR_PAIR(i));
-				printw("*");
-				attroff(COLOR_PAIR(i));	
-		//}	
+	//assume_default_colors(0, 1); 
+	//Term::scr.set_background_color(Color::Green);
+	
+	//printw("coucou");
+
+	//refresh();
+
+	//assume_default_colors(0, 2);
+	Term::scr.set_background_color(Color::Green);
+
+	//Term::scr.fill(Cell('@', Color::Red, Attr::Blink))
+
+	attron(COLOR_PAIR(10) | Attr::Underline);// | Attr::Reverse | Attr::Italic);
+	printw("%lc", U_CIRCLE);
+	attroff(COLOR_PAIR(10) | Attr::Underline);// | Attr::Reverse | Attr::Italic);
+
+	//erase();
+	/*
+	Term::scr.set_background_color(Color::Red);
+
+	attron(COLOR_PAIR(5));
+	printw("COUCOU");
+	attroff(COLOR_PAIR(5));
+	*/
+	refresh();
+
+	//assume_default_colors(0, 0);
+/*
+	for(int j = n ; j < min ; j++){
+		
+		assume_default_colors(-1, j);
+		
+		//bkgdset()
+
+		//clear();
+
+		for(int i = 0 ; i < 256 ; i++){
+			attron(COLOR_PAIR(i));
+			printw("*");
+			attroff(COLOR_PAIR(i));	
+		}
+
+		wnoutrefresh(stdscr);
+		doupdate();
+
+		//Term::wait(max);
 	}
 
+	chtype ch = mvinch(0, max);
+
+	erase();
+
+	bkgd(ch);
+
+	attron(COLOR_PAIR(2));
+	printw("coucou");
+	attroff(COLOR_PAIR(2));
+
+	refresh();
+
+	assume_default_colors(-1, 18);
+
+	//bkgd(' ');
+	//clear();
+
+	attron(COLOR_PAIR(3));
+	printw("coucou");
+	attroff(COLOR_PAIR(3));
+
+	refresh();
+
+	//attron(ch & A_COLOR);
+	//mvprintw(10, 10, "color (0, %d)", max);
+	//attroff(ch & A_COLOR);
+
+	
+	//refresh();
+*/
 	getch();
 
 	Term::end_curs();

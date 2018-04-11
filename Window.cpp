@@ -40,7 +40,6 @@ Cell Window::get_cell(const Vector2i& coord) const{
 }
 
 void Window::set_cell(const Vector2i& coord, const Cell& cell){
-
 	cchar_t c = cell;
 
 	if(cell.color == ColorPair::Default)
@@ -79,7 +78,6 @@ ColorPair Window::get_color() const{
 }
 
 void Window::set_color(ColorPair color){
-
 	wcolor_set(m_win, color.pair_num(), NULL);
 }
 
@@ -203,13 +201,21 @@ void Window::set_background(ColorPair color, Attr attr){
 	set_background(cell);
 } 
 
+Color Window::get_background_color() const{
+	return m_background;
+}
+
+void Window::set_background_color(const Color& color){
+	m_background = color;
+	assume_default_colors(0, to_number(color));
+}
+
 void Window::clear(){
 	/* faster than wclear */
 	werase(m_win);
 } 
 
 void Window::clear(const IntRect& zone){
-	
 	Cell back = get_background();
 
 	for(int j = zone.y ; j < zone.height ; j++){

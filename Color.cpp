@@ -92,11 +92,11 @@ ColorPair::ColorPair(Color front, Color back) {
 ////////////////////////////////////////////////// METHODES
 
 int ColorPair::pair_num() const{
-	return (to_number(front)) * COLORS + (to_number(back));
+	return to_number(front); //* COLORS + (to_number(back));
 }
 
 ColorPair::operator chtype() const{
-	return COLOR_PAIR(pair_num());
+	return COLOR_PAIR(pair_num()) + 1;
 }
 
 ////////////////////////////////////////////////// VARIABLE STATIQUES
@@ -121,7 +121,8 @@ void init_color_pairs(){
 
 		use_default_colors(); // -> COLOR_PAIR(0) = DefaultColor (est un extensino de ncurses)
 
-		int k = 1;
+		//int k = 1;
+		/*
 		for (int b = 0; b < 8; ++b){
 
 			for (int f = 0; f < 8; ++f){
@@ -130,12 +131,11 @@ void init_color_pairs(){
 				k++;
 			}
 		}
-
+		*/
 		for (int f = 0; f < COLORS; ++f){
 			//init_pair(numero, front, back) (-1 correspond à la couleur par default du terminal)
 			//init_pair(b * COLORS + f + 1, f, b);
-			init_pair(k, f, -1);
-			k++;
+			init_pair(f + 1, f, -1);
 		}
 
 

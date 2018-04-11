@@ -48,6 +48,7 @@
 #define U_DIAMOND 			L'\u25C6'
 
 #define U_POINT 			L'\u25CF'
+#define U_CIRCLE 			L'\u25EF'
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CLASS WINDOW
 
@@ -59,6 +60,8 @@ protected:
 
 	WINDOW* m_win;
 	Window(WINDOW* win);
+
+	Color m_background;
 
 public:
 
@@ -122,6 +125,10 @@ public:
 	Cell get_background() const;
 	void set_background(const Cell&);
 	void set_background(ColorPair color, Attr attr = Attr::Normal); 
+
+/* Return/set the window's background color */
+	Color get_background_color() const;
+	void set_background_color(const Color& color);
 
 /* copy the content of another Window */
 	//void copy(const Window&, const IntRect&, const Vector2i&, bool convert_attr = true);// copywin;

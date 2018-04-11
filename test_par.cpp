@@ -46,12 +46,12 @@ int main(int argc, char const *argv[])
 	
 	Canvas canvas;
 
-	//canvas.set_attr(Attr::Bright);
-	canvas.set_color(ColorPair::White);
+	canvas.set_attr(Attr::Underline);
+	canvas.set_color(ColorPair::Red);
 
 	IntRect zone(Vector2i::zero, Vector2i(50, 50));
 
-	ParticleSystem PS(lifetime, IntRect(-1, 1, -1, 1), 0.99);//0.95);
+	ParticleSystem PS(lifetime, IntRect(-1, 1, -1, 1), 0.95);//0.95);
 	//PS.add_particles(n, Vector2f(canvas.get_size()) / float(2.0));
 	PS.add_particles(n, zone);
 
@@ -93,7 +93,6 @@ int main(int argc, char const *argv[])
 		clear_time = (clock() - clear_time) / (float)CLOCKS_PER_SEC;
 
 		////////// RUN
-		
 
 		float run_time = clock();
 
