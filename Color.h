@@ -34,9 +34,9 @@ class Color {
 
 public:
 	
-	short r;
-	short g;
-	short b;
+	uint8_t r;
+	uint8_t g;
+	uint8_t b;
 
 	Color();
 	Color(chtype color);

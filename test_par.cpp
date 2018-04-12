@@ -21,7 +21,7 @@ int main(int argc, char const *argv[])
 	//argv variables:
 
 	//int border = 0;
-	int n = 1000;
+	int n = 30000;
 	float lifetime = 10000000;
 	Vector2f gravity(0.0, 0.0);
 	Vector2f wind(0.0, 0.0);
@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
 		lifetime = atof(argv[2]);
 
 	if(argc > 3)
-		gravity.x = atof(argv[3]);
+		gravity.y = atof(argv[3]);
 
 	if(argc > 4)
 		wind.x = atof(argv[4]);
@@ -47,7 +47,7 @@ int main(int argc, char const *argv[])
 	//refresh();
 
 	Canvas canvas;
-	//canvas.set_background_color(Color::Green);
+	//canvas.set_background_color(Color::Magenta);
 	//wclear(canvas);
 	//canvas.set_attr(Attr::Bright);
 	//canvas.set_color(Color::Red);
@@ -56,7 +56,7 @@ int main(int argc, char const *argv[])
 
 	IntRect zone(Vector2i::zero, Vector2i(50, 50));
 
-	ParticleSystem PS(lifetime, IntRect(-1, 1, -1, 1), 0.95);//0.95);
+	ParticleSystem PS(lifetime, IntRect(-1, 1, -1, 1), 1);//0.95);
 	//PS.add_particles(n, Vector2f(canvas.get_size()) / float(2.0));
 	PS.add_particles(n, zone);
 
@@ -65,6 +65,7 @@ int main(int argc, char const *argv[])
 		//canvas.set_color(Color(rand() % 256, rand() % 256, rand() % 256));
 
 		nbframe++;
+		PS.add_particles(n, Vector2f(canvas.get_size()) / 2.0f);
 
 		float total_time = clock();
 
@@ -88,6 +89,7 @@ int main(int argc, char const *argv[])
 			PS.apply_attractor(Attractor(origin));
 		else if(Mouse::is_released(Mouse::Middle))
 			PS.add_particles(n, zone);
+		else if(Keyboard::is_pressed(Keyboard::Z))
 
 		calc_time = (clock() - calc_time) / (float)CLOCKS_PER_SEC;
 
@@ -95,7 +97,7 @@ int main(int argc, char const *argv[])
 
 		float clear_time = clock();
 
-		canvas.clear();
+		//canvas.clear();
 		//wclear(canvas);
 
 		clear_time = (clock() - clear_time) / (float)CLOCKS_PER_SEC;
@@ -131,7 +133,7 @@ int main(int argc, char const *argv[])
 
 		frame_time = (clock() - total_time) / (float)CLOCKS_PER_SEC;
 
-		//Term::wait(16);
+		Term::wait(16);
 	}
 
 	Term::end_curs();

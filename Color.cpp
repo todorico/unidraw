@@ -212,7 +212,7 @@ int to_16_color_num(uint8_t r, uint8_t g, uint8_t b){
 
 	if(is_color_8_to_15(r, g, b)){
 		if(r == 128)
-			return 8;
+			return 8; 
 		else
 			return 8 + to_8_color_num(r, g, b);
 	}
@@ -227,9 +227,9 @@ int to_88_color_num(uint8_t r, uint8_t g, uint8_t b){
 		return 80 + round((r * 8) / 238.0f); 
 	}
 	else{
-		short red = std::max(((r * 4) / 255) - 1, 0); 
-		short green = std::max(((g * 4) / 255) - 1, 0); 
-		short blue = std::max(((b * 4) / 255) - 1, 0); 
+		short red = std::max((int)((r * 4) / 255) - 1, 0); 
+		short green = std::max((int)((g * 4) / 255) - 1, 0); 
+		short blue = std::max((int)((b * 4) / 255) - 1, 0); 
 
 		return 16 + blue + 4 * green + 16 * red;
 	}
@@ -238,12 +238,12 @@ int to_88_color_num(uint8_t r, uint8_t g, uint8_t b){
 int to_256_color_num(uint8_t r, uint8_t g, uint8_t b){
 
 	if(is_color_greyscale(r, g, b)){
-		return 232 + ((r * 24) / 238.0f); 
+		return 232 + (int)((r * 24) / 238) - 1; 
 	}
 	else{
-		short red = std::max(((r * 6) / 255) - 1, 0); 
-		short green = std::max(((g * 6) / 255) - 1, 0); 
-		short blue = std::max(((b * 6) / 255) - 1, 0); 
+		short red = std::max((int)((r * 6) / 255) - 1, 0); 
+		short green = std::max((int)((g * 6) / 255) - 1, 0); 
+		short blue = std::max((int)((b * 6) / 255) - 1, 0); 
 
 		return 16 + blue + 6 * green + 36 * red;
 	}

@@ -61,17 +61,76 @@ int main(int argc, char** argv)
 
 	Term::init_curs();
 
-	Term::scr.set_background_color(Color::White);
-
-	for(int r = 1 ; r < 7 ; r++){
-		for(int g = 1 ; g < 7 ; g++){
-			for(int b = 1 ; b < 7 ; b++){
-				Term::scr.set_color(Color((r * 255) / 6, (g * 255) / 6, (b * 255) / 6));
-				printw("%c", '@');
-			}
-		}
+	for(int i = 0 ; i < n ; i++){
+		//Color color(rand() % 256, rand() % 256, rand() % 256);
+		Term::scr.set_color(Color(rand() % 256, rand() % 256, rand() % 256));
+		printw("%c", '@');
+		//Term::scr.set_offColor(i, 0, 0));
 	}
+/*
+	//ROUGE
 
+	for(int i = 0 ; i < n ; i++){
+		Term::scr.set_on(Attr::HalfBright | Color(i, 0, 0));
+		printw("%c", '@');
+		Term::scr.set_off(Attr::HalfBright | Color(i, 0, 0));
+	}
+	printw("\n");
+
+	
+	for(int i = 0 ; i < n ; i++){
+		Term::scr.set_color(Color(i, 0, 0));
+		printw("%c", '@');
+	}
+	printw("\n");
+
+	//VERT
+
+	for(int i = 0 ; i < n ; i++){
+		Term::scr.set_on(Attr::HalfBright | Color(0, i, 0));
+		printw("%c", '@');
+		Term::scr.set_off(Attr::HalfBright | Color(0, i, 0));
+	}
+	printw("\n");
+
+	for(int i = 0 ; i < n ; i++){
+		Term::scr.set_color(Color(0, i, 0));
+		printw("%c", '@');
+	}
+	printw("\n");
+
+	//BLEU
+
+	for(int i = 0 ; i < n ; i++){
+		Term::scr.set_on(Attr::HalfBright | Color(0, 0, i));
+		printw("%c", '@');
+		Term::scr.set_off(Attr::HalfBright | Color(0, 0, i));
+	}
+	printw("\n");
+
+	for(int i = 0 ; i < n ; i++){
+		Term::scr.set_color(Color(0, 0, i));
+		printw("%c", '@');
+	}
+	printw("\n");
+
+
+	getch();
+	
+	clear();
+
+	if(min)
+	 	Term::scr.set_background_color(Color::Green);
+	
+	for(int i = 0 ; i < n ; i++){
+		Term::scr.set_color(Color(i, i, i));
+		printw("%c", '@');
+	}
+	printw("\n");
+	
+	//Term::scr.set_color(Color(2, i, i));
+	//printw("%c", '@');
+*/
 	getch();
 
 	Term::end_curs();
