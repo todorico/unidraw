@@ -21,7 +21,7 @@ int main(int argc, char const *argv[])
 	//argv variables:
 
 	//int border = 0;
-	int n = 30000;
+	int n = 1000;
 	float lifetime = 10000000;
 	Vector2f gravity(0.0, 0.0);
 	Vector2f wind(0.0, 0.0);
@@ -49,8 +49,8 @@ int main(int argc, char const *argv[])
 	Canvas canvas;
 	//canvas.set_background_color(Color::Green);
 	//wclear(canvas);
-	canvas.set_attr(Attr::Bright);
-	canvas.set_color(Color::Red);
+	//canvas.set_attr(Attr::Bright);
+	//canvas.set_color(Color::Red);
 
 	//canvas.set_background_color(Color::Yellow);
 
@@ -62,7 +62,7 @@ int main(int argc, char const *argv[])
 
 	while(!Keyboard::is_pressed(Keyboard::Escape)){
 
-		canvas.set_color(Color(rand() % 256, rand() % 256, rand() % 256));
+		//canvas.set_color(Color(rand() % 256, rand() % 256, rand() % 256));
 
 		nbframe++;
 
