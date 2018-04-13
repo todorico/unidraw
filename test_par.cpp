@@ -56,7 +56,7 @@ int main(int argc, char const *argv[])
 
 	IntRect zone(Vector2i::zero, Vector2i(50, 50));
 
-	ParticleSystem PS(lifetime, IntRect(-1, 1, -1, 1), 1);//0.95);
+	ParticleSystem PS(lifetime, IntRect(-1, 1, -1, 1), 0.95);
 	//PS.add_particles(n, Vector2f(canvas.get_size()) / float(2.0));
 	PS.add_particles(n, zone);
 
@@ -65,7 +65,7 @@ int main(int argc, char const *argv[])
 		//canvas.set_color(Color(rand() % 256, rand() % 256, rand() % 256));
 
 		nbframe++;
-		PS.add_particles(n, Vector2f(canvas.get_size()) / 2.0f);
+		//PS.add_particles(n, Vector2f(canvas.get_size()) / 2.0f);
 
 		float total_time = clock();
 
@@ -97,7 +97,7 @@ int main(int argc, char const *argv[])
 
 		float clear_time = clock();
 
-		//canvas.clear();
+		canvas.clear();
 		//wclear(canvas);
 
 		clear_time = (clock() - clear_time) / (float)CLOCKS_PER_SEC;
@@ -133,7 +133,7 @@ int main(int argc, char const *argv[])
 
 		frame_time = (clock() - total_time) / (float)CLOCKS_PER_SEC;
 
-		Term::wait(16);
+		//Term::wait(16);
 	}
 
 	Term::end_curs();
