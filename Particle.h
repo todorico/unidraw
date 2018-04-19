@@ -17,6 +17,7 @@ public:
 	Vector2f position;
 	Vector2f velocity;
 	Vector2f acceleration;
+	float birth;
 	float lifetime;
 	float mass;
 
@@ -73,6 +74,7 @@ class ParticleSystem {
 
 public:
 	std::list<Particle> particles;
+	std::list<Vector2f> particles_forces;
 
 	float duration;
 
@@ -88,7 +90,7 @@ public:
 	void apply_repeller(const Repeller& rep);
 	void apply_attractor(const Attractor& att);
 
-	void add_particles(int n, Vector2f origin);
+	void add_particles(int n, Vector2f origin, float radius = 1);
 	void add_particles(int n, IntRect zone);
 	
 	void run(Canvas& c);

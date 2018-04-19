@@ -9,6 +9,7 @@
 class Canvas : public Window {
 
 protected:
+
 	Vector2i m_pixel_size;
 
 public:
@@ -54,12 +55,12 @@ public:
 ///////////////////////////////////////////////// FONCTIONS DECLARATION
 
 /* Converti la position du pixel (x, y) en coordonnée de cellule (row, col) */
-Vector2i pixel_to_cell_coord(int x, int y);
-Vector2i pixel_to_cell_coord(const Vector2i& point);
+Vector2i map_pixel_to_cell(unsigned int x, unsigned int y);
+Vector2i map_pixel_to_cell(const Vector2i& point);
 
 /* Converti les coordonnées de la cellule (row, col) en position de pixel (x, y) */
-Vector2i cell_to_pixel_pos(int col, int row);
-Vector2i cell_to_pixel_pos(const Vector2i& cell_coord);
+Vector2i map_cell_to_pixel(unsigned int x, unsigned int y);
+Vector2i map_cell_to_pixel(const Vector2i& point);
 
 /* verifie si le wide character "wch" est du braille */
 bool is_braille(wint_t wch);

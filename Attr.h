@@ -25,6 +25,7 @@ public:
 
 	Attr();
 	Attr(chtype);
+	
 	operator chtype() const;
 
 	static const Attr Normal;

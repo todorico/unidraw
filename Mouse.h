@@ -2,6 +2,7 @@
 #define _MOUSE_H_
 
 #include "Vector2.h"
+#include "list"
  
 extern "C"{
 #include <ncursesw/curses.h>
@@ -14,6 +15,8 @@ class Mouse {
 
 public:
 
+	/* contient le mask du dernier bouton relacher */
+	static mmask_t released;
 	static MEVENT event;
 
 	enum Button { Left, Right, Middle };

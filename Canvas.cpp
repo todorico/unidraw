@@ -5,10 +5,10 @@
  
 const wint_t braille_char_offset = 0x2800;
 
-const int pixel_map[4][2] = { 	{0x01, 0x08}, 
-{0x02, 0x10},
-{0x04, 0x20},
-{0x40, 0x80} };
+const int pixel_map[4][2] = { {0x01, 0x08}, 
+							  {0x02, 0x10},
+							  {0x04, 0x20},
+							  {0x40, 0x80} };
 
 ////////////////////////////////////////////////// CONSTRUCTEURS
 
@@ -44,16 +44,21 @@ void Canvas::set(const Vector2i& point){
 
 	if(is_in(point)){
 
-		Vector2i cell_coord = pixel_to_cell_coord(point);
+		cchar_t c;
 
-		wint_t cell = get_cell(cell_coord).character;
+		Vector2i cell_coord(map_pixel_to_cell(point));
+		
+		mvwin_wch(m_win, cell_coord.y, cell_coord.x, &c);
+		
+		if(!is_braille(c.chars[0]))
+			c.chars[0] = braille_char_offset;
 
-		if(!is_braille(cell))
-			cell = braille_char_offset;
+		//y % 4 == y & 3 / x % 2 == x & 1
+		c.chars[0] |= pixel_map[point.y & 3][point.x & 1];
 
-		cell |= pixel_map[point.y % 4][point.x % 2];
+		c.attr &= ~A_COLOR;
 
-		set_cell(cell_coord, cell);
+		mvwadd_wch(m_win, cell_coord.y, cell_coord.x, &c);
 	}
 }
 
@@ -65,7 +70,7 @@ void Canvas::unset(const Vector2i& point){
 
 	if(is_in(point)){
 
-		Vector2i cell_coord = pixel_to_cell_coord(point);
+		Vector2i cell_coord(map_pixel_to_cell(point));
 
 		wint_t cell = get_cell(cell_coord).character;
 
@@ -126,7 +131,7 @@ bool Canvas::is_set(int x, int y){
 }
 
 bool Canvas::is_set(const Vector2i& point){
-	wint_t cell = get_cell(pixel_to_cell_coord(point)).character;
+	wint_t cell = get_cell(map_pixel_to_cell(point)).character;
 	return is_braille(cell) && cell & pixel_map[point.y % 4][point.x % 2];
 }
 
@@ -135,25 +140,28 @@ bool Canvas::is_in(int x, int y){
 }
 
 bool Canvas::is_in(const Vector2i& point){
-	return point.x >= 0 && point.y >= 0 && point.x < get_size().x && point.y < get_size().y;
+	Vector2i size = get_size();
+	return point.x >= 0 && point.y >= 0 && point.x < size.x && point.y < size.y;
 }
 
 ////////////////////////////////////////////////// FONCTIONS DEFINITION
 
-Vector2i pixel_to_cell_coord(int x, int y){
-	return Vector2i(x / 2, y / 4);
+Vector2i map_pixel_to_cell(unsigned int x, unsigned int y){
+	//x / 2 == x >> 1 && y / 4 == y >> 2 
+	return Vector2i(x >> 1, y >> 2);
 }
 
-Vector2i pixel_to_cell_coord(const Vector2i& point){
-	return pixel_to_cell_coord(point.x, point.y);
+Vector2i map_pixel_to_cell(const Vector2i& point){
+	return map_pixel_to_cell(point.x, point.y);
 }
 
-Vector2i cell_to_pixel_pos(int col, int row){
-	return Vector2i(col * 2, row * 4);
+Vector2i map_cell_to_pixel(unsigned int col, unsigned int row){
+	//x * 2 == x << 1 && y * 4 == y << 2 
+	return Vector2i(col << 1, row << 2);
 }
 
-Vector2i cell_to_pixel_pos(const Vector2i& cell_coord){
-	return cell_to_pixel_pos(cell_coord.x, cell_coord.y);
+Vector2i map_cell_to_pixel(const Vector2i& cell_coord){
+	return map_cell_to_pixel(cell_coord.x, cell_coord.y);
 }
 
 bool is_braille(wint_t cell){

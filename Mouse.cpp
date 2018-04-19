@@ -4,6 +4,7 @@
 ///////////////////////////////////////////////// VARIABLES STATIQUES
  
 MEVENT Mouse::event;
+mmask_t Mouse::released;
 
 ///////////////////////////////////////////////// METHODES
 
@@ -46,12 +47,11 @@ bool Mouse::is_released(Button button) {
 		input_released = event.bstate & BUTTON2_RELEASED;
 		break;
 		default:
-		return false;
 		break;
 	}
-
+	
 	if(input_released)
-		event.bstate = 0;
+		released = input_released;
 
 	return input_released;
 }
@@ -64,7 +64,7 @@ bool Mouse::is_scrolling(Wheel wheel) {
 		return event.bstate & BUTTON4_PRESSED;
 		break;
 		case Mouse::ScrollDown:
-		return false;//return event.bstate & BUTTON5_PRESSED;
+		return false;//return event.bstate & BUTTON5_PRESSED; //pas reperer par le compilateur
 		break;
 		default:
 		return false;

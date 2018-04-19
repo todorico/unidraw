@@ -81,9 +81,9 @@ int main(int argc, char** argv)
 	Canvas canvas(k, k);
 
 	//(radius * 2 + 1, radius * 2 + 1);
-	canvas.set_on(Color::Red);
+	canvas.set_on(ColorPair::Red);
 	canvas.set(canvas.get_size() - Vector2i::one);
-	canvas.set_off(Color::Red);
+	canvas.set_off(ColorPair::Red);
 	/*
 	for(int i = 0 ; i < canvas.get_size().x; i++){
 		for(int j = 0 ; j < canvas.get_size().y ; j++){
@@ -96,7 +96,7 @@ int main(int argc, char** argv)
 	mvwprintw(stdscr, 0, 0, "Canvas.size = (%d, %d)", canvas.get_size().x, canvas.get_size().y);
 	mvwprintw(stdscr, 1, 0, "Canvas.dimension = (%d, %d)", canvas.get_dimension().x, canvas.get_dimension().y);
 
-	canvas.set_color(Color::Green);
+	canvas.set_color_pair(ColorPair::Green);
 	canvas.set_attr(Attr::Bright);
 
 	Vector2i p1(10, 20);

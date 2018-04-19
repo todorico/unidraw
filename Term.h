@@ -15,6 +15,7 @@
 class TermScreen : public Window {
 
 private:
+
 	static TermScreen* m_screen;
 
 	TermScreen();
@@ -22,9 +23,10 @@ private:
 	TermScreen& operator=(const TermScreen&);
 
 public:
+
 	~TermScreen();
 
-	static TermScreen* getInstance();
+	static TermScreen* get_instance();
 };
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CLASS TERM
@@ -32,6 +34,7 @@ public:
 class Term {
 
 public:
+	
 	static Window scr;
 
 	static void init_curs();

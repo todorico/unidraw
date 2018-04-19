@@ -33,20 +33,15 @@ enum ColorUnit{
 class Color {
 
 public:
-	
+
 	uint8_t r;
 	uint8_t g;
 	uint8_t b;
 
 	Color();
-	Color(chtype color);
 	Color(uint8_t red, uint8_t green, uint8_t blue);
 
-	int to_number() const;
-	short to_pair() const;
 	std::string to_string() const;
-	
-	operator chtype() const;
 
 	static const Color Black;
 	static const Color Red;
@@ -71,19 +66,23 @@ Color& operator*=(Color& left, const Color& right);
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CLASS COLORPAIR
 
-class ColorPair
-{
+class ColorPair {
+	
 public:
-	Color front;
-	Color back;
+
+	short front;
+	short back;
 
 	ColorPair();
 	ColorPair(chtype);
 	ColorPair(ColorUnit front, ColorUnit back);
-	ColorPair(Color front, Color back);
+
+/* Renvoie la couleur de devant ou de derrière de la paire de couleur */
+	Color get_front_color();
+	Color get_back_color();
 
 /* Renvoie le numéro correspondant à la paire de couleur composée de front et back */
-	int pair_num() const;
+	short to_pair() const;
 
 /* Convertie en chtype la paire de couleur composée de front et back */
 	operator chtype() const;
@@ -99,10 +98,36 @@ public:
 	static const ColorPair White;
 };
 
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CLASS COLORSCALE
+
+class ColorScale {
+
+private:
+
+	uint8_t m_scale;
+
+public:	
+
+	ColorScale();
+	ColorScale(uint8_t scale);
+
+/* Renvoie la couleur que represente le numero d'echelle "m_scale" */
+	Color to_color() const;
+
+/* Renvoie paire de couleur associer au numero d'echelle "m_scale" */
+	short to_pair() const;
+
+/* Convertie en chtype l'echelle de couleur */
+	operator chtype() const;
+};
+
 ////////////////////////////////////////////////// FONCTIONS DECLARATION
 
 /* Initialise toutes les pairs de couleurs possible en fonction du terminal */
 void init_color_pairs();
+
+/* Definie de quoi serons composé les couleurs de l'echelle de couleur ColorScale allant de start a end */
+void init_color_scale(Color start, Color end, short background = -1);
 
 /* Change les valeurs de rouge vert et bleu associée à une couleur */
 void set_color_rgb(ColorUnit color, short r, short g, short b);
@@ -130,7 +155,6 @@ int to_256_color_num(uint8_t r, uint8_t g, uint8_t b);
 
 /* Convertie le numero de la couleur en couleur rgb */
 Color to_color_rgb(int color_num);
-
 //#DECLARATION_END
 
 #endif

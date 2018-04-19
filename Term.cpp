@@ -15,10 +15,10 @@ TermScreen::~TermScreen() {
 
 ////////////////////////////////////////////////// METHODES
 
-TermScreen* TermScreen::getInstance(){
-	if(!m_screen){
+TermScreen* TermScreen::get_instance(){
+	if(!m_screen)
 		m_screen = new TermScreen();
-	}
+
 	return m_screen;
 }
 
@@ -47,7 +47,7 @@ void Term::init_curs() {
 
 	init_color_pairs(); // initialize colors for the Term if compatible
 
-	Term::scr = *TermScreen::getInstance();
+	Term::scr = *TermScreen::get_instance();
 
 	set_keypad_enabled(true);
 	set_mouse_enabled(true);
@@ -108,21 +108,36 @@ void Term::push_input(int ch){
 
 int Term::read_input(){
 
-	int ch = getch();
-
-	if(ch == KEY_MOUSE){
-
-		MEVENT temp = Mouse::event;
-		
-		getmouse(&(Mouse::event));
-
-		//Si l'evenement correspond a un deplacement du curseur
-		if(Mouse::event.bstate & REPORT_MOUSE_POSITION)
-			Mouse::event.bstate = temp.bstate;
+	int ch = -1;
+	
+	/* si un bouton a été relacher alors on annule l'evenement de relachement */
+	if(Mouse::released){
+		Mouse::event.bstate = 0;
+		Mouse::released = 0;
 	}
-	else{
-		Keyboard::input = ch;
+	
+	do
+	{
+		ch = getch();
+
+		if(ch == KEY_MOUSE){
+
+			MEVENT temp = Mouse::event;
+			
+			getmouse(&(Mouse::event));
+
+			//Si l'evenement correspond a un deplacement du curseur (REPORT_MOUSE_POSITION = 010000...)
+			if(Mouse::event.bstate & REPORT_MOUSE_POSITION)
+				Mouse::event.bstate = temp.bstate; //On garde l'etat du bouton de l'evenement precedant.
+			
+			//Mouse::event.bstate |= temp.bstate;
+
+		}
+		else{
+			Keyboard::input = ch;
+		}
 	}
+	while(ch == KEY_MOUSE);
 
 	return ch;
 }

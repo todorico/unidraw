@@ -61,8 +61,6 @@ protected:
 	WINDOW* m_win;
 	Window(WINDOW* win);
 
-	Color m_background;
-
 public:
 
 	enum BorderType {
@@ -96,15 +94,15 @@ public:
 /* return/set a Window's cell relative to up-left corner of the window (col, row) */
 	Cell get_cell(const Vector2i& coord) const;
 	void set_cell(const Vector2i& coord, const Cell& cell);
-	void set_cell(const Vector2i& coord, wint_t wchar, Color color = Color::White, Attr attr = Attr::Normal);
+	void set_cell(const Vector2i& coord, wint_t wchar, ColorPair color = ColorPair::Default, Attr attr = Attr::Normal);
 
 /* return/set the Window's attribute when writing */
 	Attr get_attr() const; //wattr_set
 	void set_attr(Attr); //wattr_get
 
 /* return/set the Window's color when writing */
-	Color get_color() const;
-	void set_color(Color);
+	ColorPair get_color_pair() const;
+	void set_color_pair(ColorPair);
 
 /* set on/off a Window's attribute and/or Color can be or'd with | */
 	void set_on(chtype attr_color);
@@ -114,21 +112,23 @@ public:
 	std::wstring to_wstring() const;
 
 /* draw a border around the window */
-	void set_border(BorderType type, Color c = Color::White, Attr  a = Attr::Normal); //verifier pas de problème avec assignation par default
+	void set_border(BorderType type, ColorPair c = ColorPair::Default, Attr  a = Attr::Normal); //verifier pas de problème avec assignation par default
 	void set_border(Cell left, Cell right, Cell up, Cell down, Cell upLeft, Cell upRight, Cell downLeft, Cell downRight);
 
 /* fill the windows background whith a specific Cell, Color and/or Attribute */
 	void fill(const Cell&);
-	void fill(Color color, Attr attr = Attr::Normal); 
+	void fill(ColorPair color, Attr attr = Attr::Normal); 
 
 /* return/set the windows background whith a specific Cell, Color and/or Attribute */
 	Cell get_background() const;
 	void set_background(const Cell&);
-	void set_background(Color color, Attr attr = Attr::Normal); 
+	void set_background(ColorPair color, Attr attr = Attr::Normal); 
 
-/* Return/set the window's background color */
+/* Return/set the window's background color 
 	Color get_background_color() const;
 	void set_background_color(const Color& color);
+
+*/
 
 /* copy the content of another Window */
 	//void copy(const Window&, const IntRect&, const Vector2i&, bool convert_attr = true);// copywin;
