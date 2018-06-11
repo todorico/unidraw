@@ -8,7 +8,7 @@
 #endif
 
 extern "C"{
-#include <ncursesw/curses.h>
+#include <ncurses.h>
 }
 
 //#PREPROCESSING_END

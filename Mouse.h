@@ -5,7 +5,7 @@
 #include "list"
  
 extern "C"{
-#include <ncursesw/curses.h>
+#include <ncurses.h>
 }
 
 //#DECLARATION
