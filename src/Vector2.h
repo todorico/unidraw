@@ -109,6 +109,6 @@ std::istream& operator>>(std::istream& is, Vector2<T>& vector);
 
 //#DECLARATION_END
 
-#include "Vector2.cpp"
+#include "Vector2.tpp"
 
 #endif

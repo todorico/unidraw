@@ -6,7 +6,7 @@ using namespace std;
 		mvwprintw(canvas, 0, 0, "Particles : %d, Calculation : %f, Runtime : %f", PS.particles.size(), calc_time, run_time); \
 		mvwprintw(canvas, 1, 0, "Frame time : %f, Clear : %f, Display : %f, Update : %f", frame_time, clear_time, display_time, update_time); \
 		mvwprintw(canvas, 2, 0, "Input time : %f, Mouse pos : %d %d   ", input_time, Mouse::get_position().x, Mouse::get_position().y); \
-		canvas.display(); \
+		canvas.display();
 
 int main(int argc, char const *argv[])
 {
@@ -62,13 +62,13 @@ int main(int argc, char const *argv[])
 	PS.add_particles(n, Vector2f(canvas.get_size()) / 2.0f);
 	//PS.add_particles(n, zone);
 	
-	/*
-	bool print_left = false;
-	bool print_right = false;
-	bool print_middle = false;
-	bool print_up = false;
-	bool print_down = false;
-	*/
+	
+	//bool print_left = false;
+	//bool print_right = false;
+	//bool print_middle = false;
+	//bool print_up = false;
+	//bool print_down = false;
+	
 
 	while(!Keyboard::is_pressed(Keyboard::Escape)){
 
@@ -177,8 +177,6 @@ int main(int argc, char const *argv[])
 			mvwprintw(canvas, 10, 10, "Mouse scrollDown");
 */
 		mvwprintw(canvas, 10, 10, "Mouse bstate %x", Mouse::event.bstate);
-
-
 
 		////////// RUN
 

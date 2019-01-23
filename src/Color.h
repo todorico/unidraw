@@ -6,13 +6,13 @@
 #endif
 
 extern "C"{
-#include <ncurses.h>
+#include <ncursesw/curses.h>
 }
 #include <sstream>
 #include <algorithm>
 #include <cmath>
 
- 
+
 //#DECLARATION
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ENUMERATION COLORUNIT
 

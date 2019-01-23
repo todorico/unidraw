@@ -1,3 +1,5 @@
-**/*.exe
-bin/*
-*.stackdump
+[Bb]in/
+[Dd]ebug*/
+[Oo]bj/
+[Bb]uild/
+[Rr]elease*/

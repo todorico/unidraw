@@ -63,6 +63,6 @@ std::istream& operator>>(std::istream& is, Rect<T>& rect);
 
 //#DECLARATION_END
 
-#include "Rect.cpp"
+#include "Rect.tpp"
 
 #endif
