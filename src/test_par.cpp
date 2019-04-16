@@ -8,6 +8,18 @@ using namespace std;
 		mvwprintw(canvas, 2, 0, "Input time : %f, Mouse pos : %d %d   ", input_time, Mouse::get_position().x, Mouse::get_position().y); \
 		canvas.display();
 
+void remove_out_of_bounds(const Canvas& canvas, ParticleSystem& particle_system)
+{
+	for(auto it = particle_system.particles.begin() ; it != particle_system.particles.end() ; ++it)
+	{
+		Particle p = *it;
+		if (p.position.x < 0 || p.position.y < 0 || p.position.x > canvas.get_size().x || p.position.y > canvas.get_size().y)
+		{
+			it = particle_system.particles.erase(it);
+		}
+	}
+}
+
 int main(int argc, char const *argv[])
 {
 	srand(time(NULL));
@@ -76,7 +88,7 @@ int main(int argc, char const *argv[])
 
 		nbframe++;
 		//PS.add_particles(n, Vector2f(canvas.get_size()) / 2.0f);
-
+		
 		float total_time = clock();
 
 		////////// READ AND USE INPUT
@@ -176,7 +188,7 @@ int main(int argc, char const *argv[])
 		if(print_down)
 			mvwprintw(canvas, 10, 10, "Mouse scrollDown");
 */
-		mvwprintw(canvas, 10, 10, "Mouse bstate %x", Mouse::event.bstate);
+		// mvwprintw(canvas, 10, 10, "Mouse bstate %x", Mouse::event.bstate);
 
 		////////// RUN
 
@@ -201,7 +213,8 @@ int main(int argc, char const *argv[])
 		
 		////////// DISPLAY STATS
  
-		DISPLAY_STATS
+		// DISPLAY_STATS
+		remove_out_of_bounds(canvas, PS);
 
 		////////// UPDATE TERMINAL (PRINT TO REAL SCREEN)
 
