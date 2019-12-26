@@ -10,13 +10,7 @@
 
 | Gravity                                                      | No Gravity                                                   |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| <img src=".README.assets/Peek 26-12-2019 16-56.gif" width=100%/> | ![Peek 26-12-2019 16-56](.README.assets/Peek 26-12-2019 16-56.gif) |
-
-
-
-<img src=".README.assets/Peek 26-12-2019 16-56.gif" width=50% align="middle"/>
-
-<img src=".README.assets/Peek 26-12-2019 13-47.gif" width=50% align="middle"/>
+| ![Peek 26-12-2019 13-47](.README.assets/Peek 26-12-2019 13-47.gif) | ![Peek 26-12-2019 16-56](.README.assets/Peek 26-12-2019 16-56.gif) |
 
 
 ## Von Koch
