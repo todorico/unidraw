@@ -227,7 +227,7 @@ int main(int argc, char const *argv[])
 
 		// frame_time = (clock() - total_time) / (float)CLOCKS_PER_SEC;
 
-		// Term::wait(16);
+		Term::wait(16);
 	}
 
 	Term::end_curs();
