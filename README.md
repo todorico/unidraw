@@ -18,6 +18,12 @@
 
 
 
+
+
+
+
+
+
 ## Von Koch
 
 | Polygon 5                                                    | Polygon 10                                                   |
