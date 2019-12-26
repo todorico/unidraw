@@ -8,14 +8,14 @@
 
 ## Particle System
 
-| Gravity                                                      | No Gravity                                                   |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ![Peek 26-12-2019 13-47](.README.assets/Peek 26-12-2019 13-47.gif) | ![Peek 26-12-2019 16-56](.README.assets/Peek 26-12-2019 16-56.gif) |
+| Gravity                                      | No Gravity                                         |
+| -------------------------------------------- | -------------------------------------------------- |
+| ![PS_gravity](.README.assets/PS_gravity.gif) | ![PS_no_gravity](.README.assets/PS_no_gravity.gif) |
 
 
 ## Von Koch
 
-| Polygon 5                                                    | Polygon 10                                                   |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ![Screenshot_20191226_135509](.README.assets/Screenshot_20191226_135509-1577373540609.png) | ![Screenshot_20191226_135642](.README.assets/Screenshot_20191226_135642-1577373553567.png) |
+| Polygon 5                          | Polygon 10                           |
+| ---------------------------------- | ------------------------------------ |
+| ![VK_P5](.README.assets/VK_P5.png) | ![VK_P10](.README.assets/VK_P10.png) |
 
