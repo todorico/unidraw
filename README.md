@@ -4,24 +4,7 @@
 
 ## Particle System
 
-<img src=".README.assets/Peek 26-12-2019 16-56.gif" width=50% align="left"/><img src=".README.assets/Peek 26-12-2019 13-47.gif" width=50% align="right"/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<img src=".README.assets/Peek 26-12-2019 16-56.gif" width=50% align="left"/><img src=".README.assets/Peek 26-12-2019 13-47.gif" width=50% align="right"/></br>
 
 
 ## Von Koch
