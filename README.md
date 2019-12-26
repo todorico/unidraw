@@ -2,6 +2,8 @@
 
  A WIP C++ library to draw in a terminal using ncurses. It is based on drawille and sfml.
 
+<img src=".README.assets/Peek 26-12-2019 13-47.gif" width=50% />
+
 |                       Particle System                        |
 | :----------------------------------------------------------: |
 | <img src=".README.assets/Peek 26-12-2019 13-47.gif" width=50% /> |
