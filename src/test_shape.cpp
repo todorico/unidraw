@@ -93,8 +93,8 @@ int main(int argc, char** argv)
 	*/
 	
 
-	mvwprintw(stdscr, 0, 0, "Canvas.size = (%d, %d)", canvas.get_size().x, canvas.get_size().y);
-	mvwprintw(stdscr, 1, 0, "Canvas.dimension = (%d, %d)", canvas.get_dimension().x, canvas.get_dimension().y);
+	// mvwprintw(stdscr, 0, 0, "Canvas.size = (%d, %d)", canvas.get_size().x, canvas.get_size().y);
+	// mvwprintw(stdscr, 1, 0, "Canvas.dimension = (%d, %d)", canvas.get_dimension().x, canvas.get_dimension().y);
 
 	canvas.set_color_pair(ColorPair::Green);
 	canvas.set_attr(Attr::Bright);
@@ -124,11 +124,11 @@ int main(int argc, char** argv)
 	while(!Keyboard::is_pressed(Keyboard::Escape)){
 		
 		Term::read_input();
-		//canvas.clear();
 
 		handler(spd, printposition, canvasoffset);
 
 		canvas.display(printposition, canvasoffset);
+		// canvas.clear();
 		
 		Term::update();
 	}

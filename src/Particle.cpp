@@ -185,7 +185,6 @@ float random(int start, int end, int precision){
 
 	return (float) start + ((float) randlong / (float) precision);
 }
-
 float constrain(float f, float start, float end){
 	return f < start ? start : f > end ? end : f;  
 }

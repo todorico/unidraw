@@ -27,15 +27,15 @@ int main(int argc, char const *argv[])
 	//program variables:
 
 	int nbframe = 0;
-	float update_time = 0.0;
-	float frame_time = 0.0;
+	// float update_time = 0.0;
+	// float frame_time = 0.0;
 
 	//argv variables:
 
 	//int border = 0;
-	int n = 30000;
-	float lifetime = 10000000;
-	Vector2f gravity(0.0, 0.0);
+	int n = 700;
+	float lifetime = 100;
+	Vector2f gravity(0.0, 0.1);
 	Vector2f wind(0.0, 0.0);
 
 	if(argc > 1)
@@ -89,17 +89,17 @@ int main(int argc, char const *argv[])
 		nbframe++;
 		//PS.add_particles(n, Vector2f(canvas.get_size()) / 2.0f);
 		
-		float total_time = clock();
+		// float total_time = clock();
 
 		////////// READ AND USE INPUT
 
 		Term::read_input();
 		
-		float input_time = (clock() - total_time) / (float)CLOCKS_PER_SEC;
+		// float input_time = (clock() - total_time) / (float)CLOCKS_PER_SEC;
 
 		////////// FORCES CALCULATIONS
 
-		float calc_time = clock();
+		// float calc_time = clock();
 
 		Vector2f total_force = gravity + wind;
 
@@ -144,10 +144,11 @@ int main(int argc, char const *argv[])
 			print_down = true;
 		}
 		*/
-			
+			/*
 		if(Mouse::is_released(Mouse::Left))
 			PS.add_particles(n, origin);
-	
+	*/
+		PS.add_particles(n, Vector2f(canvas.get_size()) / 2.0f);
 
 		if(Keyboard::is_pressed(Keyboard::Z)){
 			PS.add_particles(n, origin);
@@ -165,16 +166,16 @@ int main(int argc, char const *argv[])
 			//PS.add_particles(n, zone);
 
 
-		calc_time = (clock() - calc_time) / (float)CLOCKS_PER_SEC;
+		// calc_time = (clock() - calc_time) / (float)CLOCKS_PER_SEC;
 
 		////////// CLEAR SCREEN
 
-		float clear_time = clock();
+		// float clear_time = clock();
 
 		canvas.clear();
 		//wclear(canvas);
 
-		clear_time = (clock() - clear_time) / (float)CLOCKS_PER_SEC;
+		// clear_time = (clock() - clear_time) / (float)CLOCKS_PER_SEC;
 
 /*
 		if(print_left)
@@ -192,7 +193,7 @@ int main(int argc, char const *argv[])
 
 		////////// RUN
 
-		float run_time = clock();
+		// float run_time = clock();
 
 		//canvas.set_border((Window::BorderType)border);
 		//int intensity = rand() % 256;
@@ -200,16 +201,16 @@ int main(int argc, char const *argv[])
 		PS.run(canvas);
 		//canvas.set_off(ColorScale(intensity));
 	
-		run_time = (clock() - run_time) / (float)CLOCKS_PER_SEC;
+		// run_time = (clock() - run_time) / (float)CLOCKS_PER_SEC;
 		
 		////////// DISPLAY CANVAS (PRINT TO VIRTUAL SCREEN)
 
-		float display_time = clock();
+		// float display_time = clock();
 
 		canvas.display();
 		//Term::scr.display();
 
-		display_time = (clock() - display_time) / (float)CLOCKS_PER_SEC;
+		// display_time = (clock() - display_time) / (float)CLOCKS_PER_SEC;
 		
 		////////// DISPLAY STATS
  
@@ -218,15 +219,15 @@ int main(int argc, char const *argv[])
 
 		////////// UPDATE TERMINAL (PRINT TO REAL SCREEN)
 
-		update_time = clock();
+		// update_time = clock();
 
 		Term::update();
 		
-		update_time = (clock() - update_time) / (float)CLOCKS_PER_SEC;
+		// update_time = (clock() - update_time) / (float)CLOCKS_PER_SEC;
 
-		frame_time = (clock() - total_time) / (float)CLOCKS_PER_SEC;
+		// frame_time = (clock() - total_time) / (float)CLOCKS_PER_SEC;
 
-		//Term::wait(16);
+		// Term::wait(16);
 	}
 
 	Term::end_curs();
