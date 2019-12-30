@@ -4,7 +4,7 @@
 
 # Unidraw
 
- A WIP C++ library to draw in a terminal using ncurses. It is based on drawille and sfml.
+A WIP C++ library to draw unicode pixels in a terminal using ncurses. It is based on drawille and sfml.
 
 ## Particle System
 
