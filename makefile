@@ -168,7 +168,7 @@ PREREQ_OBJ_DIRS := $(sort $(dir $(OBJS)))
 PREREQ_DIRS     := $(sort $(PREREQ_BIN_DIRS) $(PREREQ_OBJ_DIRS))
 
 ifeq ($(findstring release,$(MAKECMDGOALS)),release)
-	CC_FLAGS += -Ofast
+	CC_FLAGS += -O3
 else
 	CC_FLAGS += -Og -D DEBUG
 endif

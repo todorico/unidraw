@@ -8,9 +8,9 @@ A WIP C++ library to draw unicode pixels in a terminal using ncurses. It is base
 
 ## Particle System
 
-| Gravity                                      | No Gravity                                         |
-| -------------------------------------------- | -------------------------------------------------- |
-| ![PS_gravity](.README.assets/PS_gravity.gif) | ![PS_no_gravity](.README.assets/PS_no_gravity.gif) |
+| Gravity                                | No Gravity                                   |
+| -------------------------------------- | -------------------------------------------- |
+| ![gravity](.README.assets/gravity.gif) | ![no-gravity](.README.assets/no-gravity.gif) |
 
 
 ## Von Koch
